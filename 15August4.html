@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>15 अगस्त स्वतंत्रता दिवस प्रमाणपत्र</title>
+  <!-- html2canvas and canvas-confetti for download & celebration effects -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    :root {
+      --saffron: #FF9933;
+      --white: #FFFFFF;
+      --green: #138808;
+      --navy: #000080;
+      --gold: #D4AF37;
+      --dark: #1E293B;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #FFF3E0, #E8F5E9);
+      color: var(--dark);
+      min-height: 100vh;
+      padding: 20px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 950px;
+    }
+
+    h1.page-title {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      background: linear-gradient(to right, var(--saffron), #000, var(--green));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 800;
+    }
+
+    /* Form Styles */
+    .form-card {
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      margin-bottom: 30px;
+      border-top: 5px solid var(--saffron);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 15px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      font-weight: 600;
+      margin-bottom: 6px;
+      font-size: 0.9rem;
+      color: #334155;
+    }
+
+    .form-group input, .form-group select {
+      padding: 10px 12px;
+      border: 1.5px solid #CBD5E1;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .form-group input:focus, .form-group select:focus {
+      border-color: var(--saffron);
+      box-shadow: 0 0 0 3px rgba(255, 153, 51, 0.2);
+    }
+
+    .full-width {
+      grid-column: 1 / -1;
+    }
+
+    .submit-btn {
+      grid-column: 1 / -1;
+      background: linear-gradient(135deg, var(--saffron), var(--green));
+      color: white;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(19, 136, 8, 0.3);
+      transition: transform 0.2s;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Action Buttons Area */
+    .action-buttons {
+      display: none;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border-radius: 50px;
+      border: none;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      transition: all 0.2s ease;
+    }
+
+    .btn-download {
+      background: var(--navy);
+      color: white;
+    }
+
+    .btn-share {
+      background: var(--green);
+      color: white;
+    }
+
+    .btn:hover {
+      transform: scale(1.03);
+    }
+
+    /* Certificate Layout */
+    .certificate-wrapper {
+      display: none;
+      justify-content: center;
+      width: 100%;
+      overflow-x: auto;
+      padding-bottom: 20px;
+    }
+
+    .certificate {
+      width: 850px;
+      min-width: 850px;
+      height: 600px;
+      background: #FFFDF8;
+      position: relative;
+      padding: 20px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Outer Tricolor Border */
+    .cert-border {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border: 12px solid transparent;
+      border-image: linear-gradient(to bottom, var(--saffron) 33%, var(--white) 33% 66%, var(--green) 66%) 1;
+      pointer-events: none;
+    }
+
+    .cert-inner-border {
+      border: 2px solid var(--gold);
+      height: 100%;
+      padding: 20px 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      background: radial-gradient(circle, rgba(255,255,255,1) 60%, rgba(255,248,225,0.4) 100%);
+    }
+
+    /* Header */
+    .cert-header {
+      text-align: center;
+      position: relative;
+    }
+
+    .flag-banner {
+      width: 100%;
+      height: 8px;
+      background: linear-gradient(to right, var(--saffron) 33.33%, #FFFFFF 33.33% 66.66%, var(--green) 66.66%);
+      margin-bottom: 15px;
+      border-radius: 4px;
+    }
+
+    .ashoka-chakra {
+      width: 50px;
+      height: 50px;
+      border: 2px solid var(--navy);
+      border-radius: 50%;
+      margin: 0 auto 5px auto;
+      position: relative;
+      animation: spin 20s linear infinite;
+    }
+
+    .ashoka-chakra::before {
+      content: "⚙";
+      font-size: 42px;
+      color: var(--navy);
+      position: absolute;
+      top: -9px;
+      left: 3px;
+    }
+
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    .cert-title {
+      font-size: 1.8rem;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 800;
+    }
+
+    .cert-subtitle {
+      font-size: 1.1rem;
+      color: var(--saffron);
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    /* Certificate Body */
+    .cert-body {
+      display: flex;
+      gap: 25px;
+      align-items: center;
+      margin: 15px 0;
+    }
+
+    .photo-frame {
+      width: 140px;
+      height: 175px;
+      border: 3px solid var(--gold);
+      border-radius: 8px;
+      padding: 4px;
+      background: white;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .cert-details {
+      flex-grow: 1;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #1E293B;
+    }
+
+    .cert-details .highlight {
+      font-weight: 700;
+      color: var(--navy);
+      border-bottom: 1.5px dashed var(--saffron);
+      padding: 0 6px;
+    }
+
+    /* Footer */
+    .cert-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding-top: 10px;
+      border-top: 1px solid rgba(212, 175, 55, 0.4);
+    }
+
+    .footer-item {
+      text-align: center;
+    }
+
+    .footer-item .val {
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .footer-item .lbl {
+      font-size: 0.8rem;
+      color: #64748B;
+      margin-top: 2px;
+    }
+
+    /* Watermark / Creator Branding */
+    .creator-badge {
+      position: absolute;
+      bottom: 8px;
+      right: 15px;
+      font-size: 0.75rem;
+      color: #64748B;
+      font-weight: 600;
+    }
+
+    .creator-badge span {
+      color: var(--saffron);
+      font-weight: 700;
+    }
+
+    /* Responsive scaling for mobile screen viewing */
+    @media (max-width: 880px) {
+      .certificate-wrapper {
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1 class="page-title">🇮🇳 स्वतंत्रता दिवस प्रमाण पत्र जनरेटर 🇮🇳</h1>
+
+    <!-- Input Form -->
+    <div class="form-card" id="formCard">
+      <form id="certForm">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="fullName">पूरा नाम (Full Name) *</label>
+            <input type="text" id="fullName" placeholder="अपना नाम दर्ज करें" required>
+          </div>
+
+          <div class="form-group">
+            <label for="fatherName">पिता का नाम (Father's Name) *</label>
+            <input type="text" id="fatherName" placeholder="पिता का नाम" required>
+          </div>
+
+          <div class="form-group">
+            <label for="motherName">माता का नाम (Mother's Name) *</label>
+            <input type="text" id="motherName" placeholder="माता का नाम" required>
+          </div>
+
+          <div class="form-group">
+            <label for="category">जाति/वर्ग (Category) *</label>
+            <select id="category" required>
+              <option value="">चुनें...</option>
+              <option value="सामान्य (General)">सामान्य (General)</option>
+              <option value="ओबीसी (OBC)">ओबीसी (OBC)</option>
+              <option value="अनुसूचित जनजाति (ST)">अनुसूचित जनजाति (ST)</option>
+              <option value="अनुसूचित जाति (SC)">अनुसूचित जाति (SC)</option>
+              <option value="अन्य (Other)">अन्य (Other)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="issueDate">दिनांक (Date) *</label>
+            <input type="date" id="issueDate" required>
+          </div>
+
+          <div class="form-group">
+            <label for="photoInput">अपनी फोटो अपलोड करें (Upload Photo) *</label>
+            <input type="file" id="photoInput" accept="image/*" required>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="address">पूरा पता (Address) *</label>
+            <input type="text" id="address" placeholder="ग्राम/शहर, जिला, राज्य" required>
+          </div>
+
+          <button type="submit" class="submit-btn">प्रमाणपत्र तैयार करें (Generate Certificate)</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons" id="actionButtons">
+      <button class="btn btn-download" onclick="downloadCertificate()">
+        📥 प्रमाणपत्र डाउनलोड करें (Download)
+      </button>
+      <button class="btn btn-share" onclick="shareCertificate()">
+        📤 शेयर करें (Share)
+      </button>
+    </div>
+
+    <!-- Certificate Render Area -->
+    <div class="certificate-wrapper" id="certWrapper">
+      <div class="certificate" id="certificate">
+        <div class="cert-border"></div>
+        <div class="cert-inner-border">
+          
+          <!-- Header -->
+          <div class="cert-header">
+            <div class="flag-banner"></div>
+            <div class="ashoka-chakra"></div>
+            <div class="cert-title">15 अगस्त स्वतंत्रता दिवस प्रमाणपत्र</div>
+            <div class="cert-subtitle">राष्ट्रभक्ति एवं स्वतंत्रता दिवस सम्मान</div>
+          </div>
+
+          <!-- Body with Large Photo Frame -->
+          <div class="cert-body">
+            <div class="photo-frame">
+              <img id="certPhoto" src="" alt="User Photo">
+            </div>
+            
+            <div class="cert-details">
+              यह प्रमाणित किया जाता है कि श्री/कु. <span class="highlight" id="outName">---</span>,<br>
+              माता: <span class="highlight" id="outMother">---</span> | पिता: <span class="highlight" id="outFather">---</span>,<br>
+              वर्ग/जाति: <span class="highlight" id="outCategory">---</span>,<br>
+              निवासी: <span class="highlight" id="outAddress">---</span><br>
+              ने 15 अगस्त स्वतंत्रता दिवस समारोह में अपनी गरिमामयी उपस्थिति एवं राष्ट्र सेवा संकल्प दर्ज कर यह सम्मान पत्र प्राप्त किया है।
+            </div>
+          </div>
+
+          <!-- Footer -->
+          <div class="cert-footer">
+            <div class="footer-item">
+              <div class="val" id="outDate">15/08/2026</div>
+              <div class="lbl">जारी करने की तिथि</div>
+            </div>
+            <div class="footer-item">
+              <div class="val" style="font-family: cursive; font-size: 1.1rem; color: var(--navy);">जय हिंद! 🇮🇳</div>
+              <div class="lbl">स्वतंत्रता दिवस शुभकामनाएं</div>
+            </div>
+            <div class="footer-item">
+              <div class="val" style="border-bottom: 1px solid #94A3B8; padding-bottom: 2px;">प्रमाणित हस्ताक्षरित</div>
+              <div class="lbl">आयोजक मंडल</div>
+            </div>
+          </div>
+
+          <!-- Creator Credit Label -->
+          <div class="creator-badge">
+            Designed & Developed by: <span>DILKESH PAIKRA</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Today's date set by default
+    document.getElementById('issueDate').valueAsDate = new Date();
+
+    const form = document.getElementById('certForm');
+    const photoInput = document.getElementById('photoInput');
+    const certPhoto = document.getElementById('certPhoto');
+
+    // Photo Preview handler
+    let uploadedImageBase64 = '';
+    photoInput.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          uploadedImageBase64 = evt.target.result;
+          certPhoto.src = uploadedImageBase64;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Form Submit Handler
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Get Form Values
+      const fullName = document.getElementById('fullName').value;
+      const fatherName = document.getElementById('fatherName').value;
+      const motherName = document.getElementById('motherName').value;
+      const category = document.getElementById('category').value;
+      const address = document.getElementById('address').value;
+      const rawDate = document.getElementById('issueDate').value;
+
+      // Format Date to DD/MM/YYYY
+      const dateObj = new Date(rawDate);
+      const formattedDate = String(dateObj.getDate()).padStart(2, '0') + '/' + 
+                            String(dateObj.getMonth() + 1).padStart(2, '0') + '/' + 
+                            dateObj.getFullYear();
+
+      // Fill Certificate
+      document.getElementById('outName').innerText = fullName;
+      document.getElementById('outFather').innerText = fatherName;
+      document.getElementById('outMother').innerText = motherName;
+      document.getElementById('outCategory').innerText = category;
+      document.getElementById('outAddress').innerText = address;
+      document.getElementById('outDate').innerText = formattedDate;
+
+      // Display Certificate & Action Buttons
+      document.getElementById('certWrapper').style.display = 'flex';
+      document.getElementById('actionButtons').style.display = 'flex';
+
+      // Scroll to Certificate
+      document.getElementById('certWrapper').scrollIntoView({ behavior: 'smooth' });
+
+      // Trigger Confetti Celebration
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+      }
+    });
+
+    // Download Function
+    function downloadCertificate() {
+      const certElement = document.getElementById('certificate');
+      
+      html2canvas(certElement, {
+        scale: 2, // High DPI resolution
+        useCORS: true,
+        logging: false
+      }).then(canvas => {
+        const link = document.createElement('a');
+        const name = document.getElementById('fullName').value || 'Certificate';
+        link.download = `15_August_Certificate_${name}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      });
+    }
+
+    // Share Function
+    async function shareCertificate() {
+      const certElement = document.getElementById('certificate');
+
+      try {
+        const canvas = await html2canvas(certElement, { scale: 2 });
+        canvas.toBlob(async (blob) => {
+          const file = new File([blob], '15_August_Certificate.png', { type: 'image/png' });
+
+          if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+            await navigator.share({
+              title: '15 अगस्त प्रमाणपत्र',
+              text: 'मेरा 15 अगस्त स्वतंत्रता दिवस का प्रमाणपत्र देखें! Created by DILKESH PAIKRA.',
+              files: [file]
+            });
+          } else {
+            alert('आपके ब्राउजर में डायरेक्ट फाइल शेयर सपोर्ट नहीं है। कृपया डाउनलोड बटन का उपयोग करें।');
+          }
+        }, 'image/png');
+      } catch (error) {
+        console.error('Sharing failed:', error);
+        alert('शेयर करने में कोई समस्या आई। आप डाउनलोड कर के भी शेयर कर सकते हैं।');
+      }
+    }
+  </script>
+</body>
+</html>
